@@ -37,7 +37,7 @@ Clone the repository and set up a virtual environment:
 
 ```bash
 # Clone the repo
-git clone [https://github.com/YOUR-USERNAME/palmer-penguins-api.git](https://github.com/YOUR-USERNAME/palmer-penguins-api.git)
+git clone https://github.com/T-Luxshan/Palmer-Penguins-api.git
 cd palmer-penguins-api
 
 # Install dependencies
