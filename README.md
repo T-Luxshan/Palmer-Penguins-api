@@ -40,10 +40,6 @@ Clone the repository and set up a virtual environment:
 git clone [https://github.com/YOUR-USERNAME/palmer-penguins-api.git](https://github.com/YOUR-USERNAME/palmer-penguins-api.git)
 cd palmer-penguins-api
 
-# Create and activate virtual environment
-python -m venv venv
-source venv/bin/activate  # On Windows: venv\Scripts\activate
-
 # Install dependencies
 pip install -r requirements.txt
 
@@ -55,7 +51,9 @@ uvicorn main:app --reload
 
 ### 2. Running with Docker
 The Dockerfile is configured to train the model during the image build process.
+````
 
+### Dockerization
 ```bash
 # Build the image
 docker build -t penguins-api .
@@ -80,4 +78,22 @@ Once the server is running, navigate to:
   "flipper_length_mm": 186.0,
   "body_mass_g": 3800.0
 }
+```
+
+### Model Performance
+
+- Dataset: Palmer Penguins (~344 rows, cleaned to ~333 valid samples)
+- Model: RandomForestClassifier (100 estimators, random_state=42)
+- Features: bill_length_mm, bill_depth_mm, flipper_length_mm, body_mass_g
+- Target: species (3 classes: Adelie, Chinstrap, Gentoo)
+- Typical performance: ~97–99% accuracy (excellent separation of classes)
+
+### Tech Stack
+
+- Python 3.11+
+- FastAPI
+- scikit-learn
+- palmerpenguins
+- Pydantic
+- Docker
 
