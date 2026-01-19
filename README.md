@@ -1,1 +1,83 @@
-"# Palmer-Penguins-api" 
+# Palmer Penguins Species Prediction API
+
+A production-ready REST API that predicts penguin species (**Adelie**, **Chinstrap**, or **Gentoo**) based on anatomical measurements. This project serves as a clean template for deploying scikit-learn models using **FastAPI** and **Docker**.
+
+
+
+##  Features
+
+- **FastAPI Framework**: High-performance, easy-to-use REST API.
+- **Random Forest Classifier**: Robust machine learning model with high accuracy (~98%).
+- **Automated Docs**: Interactive API documentation via Swagger UI.
+- **Validation**: Strict Pydantic schemas to ensure anatomical measurements are realistic.
+- **Dockerized**: Containerized environment for consistent deployment.
+- **CI/CD Friendly**: Model training is integrated into the build process.
+
+---
+
+##  Model Details
+
+The model is trained on the [Palmer Penguins dataset](https://allisonhorst.github.io/palmerpenguins/), using four key features:
+
+| Feature | Description | Range (Approx) |
+| :--- | :--- | :--- |
+| `bill_length_mm` | Length of the penguin's beak (culmen) | 32mm - 60mm |
+| `bill_depth_mm` | Vertical thickness of the beak | 13mm - 22mm |
+| `flipper_length_mm` | Length of the wing | 170mm - 235mm |
+| `body_mass_g` | Total body mass in grams | 2700g - 6300g |
+
+
+
+---
+
+##  Installation & Setup
+
+### 1. Local Development
+Clone the repository and set up a virtual environment:
+
+```bash
+# Clone the repo
+git clone [https://github.com/YOUR-USERNAME/palmer-penguins-api.git](https://github.com/YOUR-USERNAME/palmer-penguins-api.git)
+cd palmer-penguins-api
+
+# Create and activate virtual environment
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Train the model (generates penguin_model.pkl)
+python train.py
+
+# Launch the API
+uvicorn main:app --reload
+
+### 2. Running with Docker
+The Dockerfile is configured to train the model during the image build process.
+
+```bash
+# Build the image
+docker build -t penguins-api .
+
+# Run the container
+docker run -d -p 8000:8000 --name penguins-api-container penguins-api
+```
+
+### API Usage
+Once the server is running, navigate to:
+
+- Interactive Swagger UI: http://localhost:8000/docs
+
+- Health Check: http://localhost:8000/
+
+### Example request body (JSON)
+
+```json
+{
+  "bill_length_mm": 39.5,
+  "bill_depth_mm": 17.4,
+  "flipper_length_mm": 186.0,
+  "body_mass_g": 3800.0
+}
+
